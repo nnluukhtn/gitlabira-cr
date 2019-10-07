@@ -1,0 +1,13 @@
+name: gitlabira
+version: 0.1.0
+
+authors:
+  - Luu Nguyen <nnluukhtn@gmail.com>
+
+targets:
+  gitlabira:
+    main: src/gitlabira.cr
+
+crystal: 0.31.1
+
+license: MIT
