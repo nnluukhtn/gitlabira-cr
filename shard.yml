@@ -4,6 +4,11 @@ version: 0.1.0
 authors:
   - Luu Nguyen <nnluukhtn@gmail.com>
 
+dependencies:
+  kemal:
+    github: sdogruyol/kemal
+    branch: master
+
 targets:
   gitlabira:
     main: src/gitlabira.cr
