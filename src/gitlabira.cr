@@ -96,7 +96,7 @@ module Gitlabira
     if result
       ticket_code = result.to_a.first
       case mr_state
-      when "opened"
+      when "opened", "updated"
         transit_jira_issue(ticket_code, ENV["JIRA_TO_REVIEW_TRANSITION"])
       when "closed"
         transit_jira_issue(ticket_code, ENV["JIRA_IN_DEVELOPMENT_TRANSITION"])
