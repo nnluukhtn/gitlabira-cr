@@ -3,6 +3,33 @@ require "kemal"
 require "logger"
 require "base64"
 require "http/client"
+require "raven"
+require "raven/integrations/kemal"
+
+# Perform basic raven configuration, none of it is required though
+Raven.configure do |config|
+  # Keep main fiber responsive by sending the events in the background
+  config.async = true
+  # Set the environment name using `Kemal.config.env`, which uses `KEMAL_ENV` variable under-the-hood
+  config.current_environment = Kemal.config.env
+end
+
+# Replace the built-in `Kemal::LogHandler` with a
+# dedicated `Raven::Kemal::LogHandler`, capturing all
+# sent messages and requests as Sentry breadcrumbs
+
+# If you'd like to preserve default logging provided by
+# Kemal, pass `Kemal::LogHandler.new` to the constructor
+if Kemal.config.logging
+  Kemal.config.logger = Raven::Kemal::LogHandler.new(Kemal::LogHandler.new)
+else
+  Kemal.config.logger = Raven::Kemal::LogHandler.new
+end
+
+# Add raven's exception handler in order to capture
+# all unhandled exceptions thrown inside your routes.
+# Captured exceptions are re-raised afterwards
+Kemal.config.add_handler Raven::Kemal::ExceptionHandler.new
 
 module Gitlabira
   VERSION = "0.1.0"
@@ -20,7 +47,7 @@ module Gitlabira
   @@logger.level = Logger::INFO
 
   private def self.jira_authentication_header
-    encoded_string = Base64.encode("#{ENV["JIRA_USER_NAME"]}:#{ENV["JIRA_PASSWORD"]}")
+    encoded_string = Base64.strict_encode("#{ENV["JIRA_USER_NAME"]}:#{ENV["JIRA_PASSWORD"]}")
     "Basic #{encoded_string}"
   end
 

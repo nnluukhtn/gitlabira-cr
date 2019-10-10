@@ -5,6 +5,8 @@ authors:
   - Luu Nguyen <nnluukhtn@gmail.com>
 
 dependencies:
+  raven:
+    github: Sija/raven.cr
   kemal:
     github: sdogruyol/kemal
     branch: master
