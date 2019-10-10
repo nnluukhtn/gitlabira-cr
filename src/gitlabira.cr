@@ -62,7 +62,7 @@ module Gitlabira
         "transition": { "id": transition_id }
       }.to_json
     )
-    if response.status == 204
+    if response.success?
       @@logger.info ">>>>> Successfully transit issue: #{jira_issue_id} to transition: #{transition_id}"
     else
       @@logger.error ">>>>> Failed to transit issue: #{jira_issue_id} to transition: #{transition_id}"
