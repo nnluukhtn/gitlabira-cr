@@ -13,7 +13,6 @@ module Gitlabira
     "Push Hook" => PUSH_EVENT,
     "Merge Request Hook" => MERGE_REQUEST_EVENT
   }
-  JIRA_PROJECT_CODES = ["QUA"]
   JIRA_BRANCH_REGEX = /[A-Z]+-\d+/
   GITLAB_REF_PREFIX = "refs/heads/"
 
@@ -96,6 +95,10 @@ module Gitlabira
       merge_request_event_handler(env)
     end
 
+    "OK"
+  end
+
+  get "/health" do
     "OK"
   end
 end
