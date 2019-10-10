@@ -1,18 +1,22 @@
 # gitlabira
 
-TODO: Write a description here
+Automate your Gitlab and Jira workflow
 
 ## Installation
 
-TODO: Write installation instructions here
+* Setup sentry project at https://sentry.io
+* You will need Jira account with password
+* You will need Jira admin permission to view Jira workflow setting and get transition id
 
 ## Usage
 
-TODO: Write usage instructions here
+* Make sure you fill all environment variables listed on `.env.sample`
+* Start your server by `crystal run src/gitlabira.cr`
 
 ## Development
 
-TODO: Write development instructions here
+* Refer to [this article](https://devcenter.heroku.com/articles/git)
+* Make sure you already create Gitlab integration for your project with `Push events` and `Merge request events` at https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#ssl-verification
 
 ## Contributing
 
